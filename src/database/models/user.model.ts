@@ -10,10 +10,8 @@ import {
     OneToMany,
    
   } from 'typeorm';
-
-import { Order } from './order.model';
-import { Payment } from './payment.model';
-import { IsEmail } from 'class-validator';
+   import { Order } from './order.model';
+   import { IsEmail } from 'class-validator';
   
   @Entity({ name: 'users' })
   export class User {
@@ -21,32 +19,32 @@ import { IsEmail } from 'class-validator';
     id: string;
   
     @Column({ type: 'varchar', length: 256, nullable: false })
-    firstName: string;
+    FirstName: string;
   
     @Column({ type: 'varchar', length: 256, nullable: false })
-    lastName: string;
+    LastName: string;
   
     @Column({ type: 'varchar', length: 256, nullable: true })
-    address: string;
+    Address: string;
   
     @Column({ type: 'varchar', length: 256, nullable: true })
     @IsEmail()
-    email: string;
+    Email: string;
   
     @Column({ type: 'varchar', length: 16, nullable: true })
-    phone: string;
+    Phone: string;
   
-    @OneToMany(() => Order, (order) => order.user)
+    @OneToMany(() => Order, (order) => order.User)
     
-    orders: Order[];
+    Orders: Order[];
   
     @CreateDateColumn()
-    createdAt: Date;
+    CreatedAt: Date;
   
     @UpdateDateColumn()
-    updatedAt: Date;
+    UpdatedAt: Date;
   
     @DeleteDateColumn()
-    deletedAt: Date;
+    DeletedAt: Date;
   }
   

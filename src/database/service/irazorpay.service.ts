@@ -2,10 +2,10 @@
 // import Razorpay from 'razorpay';
 import Razorpay from 'razorpay';
 import { Payment } from '../models/payment.model';
-import { PaymentGatewayResponseDto } from '../../domain.types/payment.gateway.response.dto';
-import { PaymentGatewayService } from '../../domain.types/payment.gateway.interface';
-import { PaymentType } from '../../domain.types/payment.type.enum';
-import { PaymentStatus } from '../../domain.types/payment.status.enum';
+import { PaymentGatewayResponseDto } from '../../domain.types/payment/payment.gateway.response.dto';
+import { PaymentGatewayService } from '../../domain.types/payment/payment.gateway.interface';
+import { PaymentType } from '../../domain.types/payment/payment.type.enum';
+import { PaymentStatus } from '../../domain.types/payment/payment.status.enum';
 import { Order } from '../models/order.model';
 
 

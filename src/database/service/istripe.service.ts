@@ -2,11 +2,11 @@
 import Stripe from 'stripe';
 import { Payment } from '../models/payment.model';
 
-import { PaymentGatewayResponseDto } from '../../domain.types/payment.gateway.response.dto';
-import { PaymentGatewayType } from '../../domain.types/payment.gateway.type.enum';
-import { PaymentType } from '../../domain.types/payment.type.enum';
-import { PaymentStatus } from '../../domain.types/payment.status.enum';
-import { PaymentGatewayService } from '../../domain.types/payment.gateway.interface';
+import { PaymentGatewayResponseDto } from '../../domain.types/payment/payment.gateway.response.dto';
+import { PaymentGatewayType } from '../../domain.types/payment/payment.gateway.type.enum';
+import { PaymentType } from '../../domain.types/payment/payment.type.enum';
+import { PaymentStatus } from '../../domain.types/payment/payment.status.enum';
+import { PaymentGatewayService } from '../../domain.types/payment/payment.gateway.interface';
 export class StripeService implements PaymentGatewayService {
   private stripe: Stripe;
 

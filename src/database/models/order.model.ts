@@ -10,10 +10,8 @@ import {
     UpdateDateColumn,
     DeleteDateColumn,
   } from 'typeorm';
-
-
   import { User } from './user.model';
-import { Payment } from './payment.model';
+  import { Payment } from './payment.model';
   
   @Entity({ name: 'orders' })
   export class Order {
@@ -22,40 +20,33 @@ import { Payment } from './payment.model';
     id: string;
   
     @Column({ type: 'timestamp', nullable: false })
-    orderConfirmationTimestamp: Date;
+    OrderConfirmationTimestamp: Date;
   
     @Column({ type: 'varchar', length: 512, nullable: true })
     description: string;
   
-    @ManyToOne(() => User, (user) => user.orders)
-    @JoinColumn({ name: 'userId' })
-    user: User;
+    @ManyToOne(() => User, (user) => user.Orders)
+    @JoinColumn()
+    User: User;
   
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
-    amountToBePaid: number;
+    AmountToBePaid: number;
   
-
     @Column({ type: 'varchar', length: 256, nullable: true })
-    gatewayOrderId: string;
+    GatewayOrderId: string;
   
-    @ManyToOne(() => Payment, (payment) => payment.order)
-    @JoinColumn({ name: 'paymentId' })
-    payment: Payment;
-    // @Column({ type: 'varchar', length: 256, nullable: true })
-    // paymentId: string;
-    
-  
-    // @Column({ type: 'varchar', length: 256, nullable: false })  // Add paymentType property
-    // paymentType: string;
-  
+    @ManyToOne(() => Payment, (payment) => payment.Order)
+    @JoinColumn()
+    Payment: Payment;
+ 
     @CreateDateColumn()
-    createdAt: Date;
+    CreatedAt: Date;
   
     @UpdateDateColumn()
-    updatedAt: Date;
+    UpdatedAt: Date;
   
     @DeleteDateColumn()
-    deletedAt: Date;
+    DeletedAt: Date;
    
     
   }

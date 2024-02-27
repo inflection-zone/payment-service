@@ -1,4 +1,3 @@
-// payment.entity.ts
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -6,9 +5,8 @@ import {
     ManyToOne,
     CreateDateColumn,
     UpdateDateColumn,
-    DeleteDateColumn,
   } from 'typeorm';
- import { Order } from './order.model';
+  import { Order } from './order.model';
   
   @Entity({ name: 'payments' })
   export class Payment {
@@ -16,37 +14,31 @@ import {
     id: string;
   
     @Column({ type: 'varchar', length: 256, nullable: false })
-    paymentGatewayType: string;
+    PaymentGatewayType: string;
   
     @Column({ type: 'varchar', length: 256, nullable: false })
-    paymentType: string;
+    PaymentType: string;
   
     @Column({ type: 'varchar', length: 256, nullable: false })
-    transactionId: string;
+    TransactionId: string;
   
-    @ManyToOne(() => Order, (order) => order.payment)
-    order: Order;
+    @ManyToOne(() => Order, (order) => order.Payment)
+    Order: Order;
   
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
-    amount: number;
-  
-    // @Column({ type: 'varchar', nullable: false })
-    // amount: string;
-    @Column({ type: 'varchar', length: 256, nullable: false })
-    paymentStatus: string;
+    Amount: number;
  
+    @Column({ type: 'varchar', length: 256, nullable: false })
+    PaymentStatus: string;
+ 
+    @CreateDateColumn()
+    PaymentTimestamp: Date;
   
     @CreateDateColumn()
-    paymentTimestamp: Date;
-  
-    @CreateDateColumn()
-    createdAt: Date;
+    CreatedAt: Date;
   
     @UpdateDateColumn()
-    updatedAt: Date;
-  
-    @DeleteDateColumn()
-    deletedAt: Date;
-    static payment: any;
+    UpdatedAt: Date;
+
   }
   
