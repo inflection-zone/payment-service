@@ -7,8 +7,6 @@ const custom_debug_logger_1 = require("./custom/custom.debug.logger");
 const custom_prod_logger_1 = require("./custom/custom.prod.logger");
 const bunyan_debug_logger_1 = require("./bunyan/bunyan.debug.logger");
 const bunyan_prod_logger_1 = require("./bunyan/bunyan.prod.logger");
-// import { PinoDebugLogger } from './pino/pino.debug.logger';
-// import { PinoProdLogger } from './pino/pino.prod.logger';
 const winston_debug_logger_1 = require("./winston/winston.debug.logger");
 const winston_prod_logger_1 = require("./winston/winston.prod.logger");
 ///////////////////////////////////////////////////////////
@@ -31,12 +29,6 @@ Logger.getLogger = () => {
             logger_ = new bunyan_prod_logger_1.BunyanProdLogger();
         }
     }
-    // if (provider === 'Pino') {
-    //     logger_ = new PinoDebugLogger();
-    //     if (process.env.NODE_ENV === 'production') {
-    //         logger_ = new PinoProdLogger();
-    //     }
-    // }
     if (provider === 'Custom') {
         logger_ = new custom_debug_logger_1.CustomDebugLogger();
         if (process.env.NODE_ENV === 'production') {

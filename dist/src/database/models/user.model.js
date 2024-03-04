@@ -23,40 +23,40 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: false }),
     __metadata("design:type", String)
-], User.prototype, "firstName", void 0);
+], User.prototype, "FirstName", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: false }),
     __metadata("design:type", String)
-], User.prototype, "lastName", void 0);
+], User.prototype, "LastName", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: true }),
     __metadata("design:type", String)
-], User.prototype, "address", void 0);
+], User.prototype, "Address", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: true }),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], User.prototype, "Email", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 16, nullable: true }),
     __metadata("design:type", String)
-], User.prototype, "phone", void 0);
+], User.prototype, "Phone", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => order_model_1.Order, (order) => order.user),
+    (0, typeorm_1.OneToMany)(() => order_model_1.Order, (order) => order.User),
     __metadata("design:type", Array)
-], User.prototype, "orders", void 0);
+], User.prototype, "Orders", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], User.prototype, "CreatedAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "updatedAt", void 0);
+], User.prototype, "UpdatedAt", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "deletedAt", void 0);
+], User.prototype, "DeletedAt", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)({ name: 'users' })
 ], User);

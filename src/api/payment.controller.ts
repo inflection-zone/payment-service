@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import express from 'express';
-import { PaymentService } from 'database/service/payment.service';
-import { RazorpayService } from 'database/service/irazorpay.service';
-import { StripeService } from 'database/service/istripe.service';
+import { PaymentService } from 'database/services/payment.service';
+import { RazorpayService } from 'database/services/providers/razorpay.service';
+import { StripeService } from 'database/services/providers/stripe.service';
 import { Order } from 'database/models/order.model';
 import { Repository } from 'typeorm';
 import { PaymentInitiationRequestDto } from 'domain.types/payment/payment.initiation.request.dto';

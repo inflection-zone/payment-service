@@ -24,41 +24,41 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamp', nullable: false }),
     __metadata("design:type", Date)
-], Order.prototype, "orderConfirmationTimestamp", void 0);
+], Order.prototype, "OrderConfirmationTimestamp", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 512, nullable: true }),
     __metadata("design:type", String)
 ], Order.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.orders),
-    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
+    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.Orders),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", user_model_1.User)
-], Order.prototype, "user", void 0);
+], Order.prototype, "User", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 2, nullable: false }),
     __metadata("design:type", Number)
-], Order.prototype, "amountToBePaid", void 0);
+], Order.prototype, "AmountToBePaid", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: true }),
     __metadata("design:type", String)
-], Order.prototype, "gatewayOrderId", void 0);
+], Order.prototype, "GatewayOrderId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => payment_model_1.Payment, (payment) => payment.order),
-    (0, typeorm_1.JoinColumn)({ name: 'paymentId' }),
+    (0, typeorm_1.ManyToOne)(() => payment_model_1.Payment, (payment) => payment.Order),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", payment_model_1.Payment)
-], Order.prototype, "payment", void 0);
+], Order.prototype, "Payment", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Order.prototype, "createdAt", void 0);
+], Order.prototype, "CreatedAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Order.prototype, "updatedAt", void 0);
+], Order.prototype, "UpdatedAt", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], Order.prototype, "deletedAt", void 0);
+], Order.prototype, "DeletedAt", void 0);
 exports.Order = Order = __decorate([
     (0, typeorm_1.Entity)({ name: 'orders' })
 ], Order);

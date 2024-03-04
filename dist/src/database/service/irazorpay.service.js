@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RazorpayService = void 0;
 // import Razorpay from 'razorpay';
 const razorpay_1 = __importDefault(require("razorpay"));
-const payment_status_enum_1 = require("../../domain.types/payment.status.enum");
+const payment_status_enum_1 = require("../../domain.types/payment/payment.status.enum");
 class RazorpayService {
     constructor() {
         this.razorpay = new razorpay_1.default({

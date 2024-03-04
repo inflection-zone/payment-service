@@ -7,18 +7,18 @@ import { Repository } from "typeorm";
 import { PaymentGatewayType } from "../../domain.types/payment/payment.gateway.type.enum";
 import { PaymentStatus } from "../../domain.types/payment/payment.status.enum";
 import { PaymentType } from "../../domain.types/payment/payment.type.enum";
-import { RazorpayService } from "./irazorpay.service";
-import { PaymentGatewayService } from "../../domain.types/payment/payment.gateway.interface";
-import { StripeService } from "./istripe.service";
+import { RazorpayService } from "./providers/razorpay.service";
+import { IPaymentGatewayService } from "../../domain.types/payment/payment.gateway.interface";
+import { StripeService } from "./providers/stripe.service";
 
 export class PaymentService {
-  private gatewayServices: Map<PaymentGatewayType, PaymentGatewayService>;
+  private gatewayServices: Map<PaymentGatewayType, IPaymentGatewayService>;
   constructor(
     private orderRepository: Repository<Order>,
     private razorpayService: RazorpayService,
     private stripeService: StripeService
   ) {
-    this.gatewayServices = new Map<PaymentGatewayType, PaymentGatewayService>()
+    this.gatewayServices = new Map<PaymentGatewayType, IPaymentGatewayService>()
       .set(PaymentGatewayType.RAZORPAY, this.razorpayService)
       .set(PaymentGatewayType.STRIPE, this.stripeService);
   }

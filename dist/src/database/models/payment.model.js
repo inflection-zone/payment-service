@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Payment = void 0;
-// payment.entity.ts
 const typeorm_1 = require("typeorm");
 const order_model_1 = require("./order.model");
 let Payment = class Payment {
@@ -23,43 +22,39 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: false }),
     __metadata("design:type", String)
-], Payment.prototype, "paymentGatewayType", void 0);
+], Payment.prototype, "PaymentGatewayType", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: false }),
     __metadata("design:type", String)
-], Payment.prototype, "paymentType", void 0);
+], Payment.prototype, "PaymentType", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: false }),
     __metadata("design:type", String)
-], Payment.prototype, "transactionId", void 0);
+], Payment.prototype, "TransactionId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => order_model_1.Order, (order) => order.payment),
+    (0, typeorm_1.ManyToOne)(() => order_model_1.Order, (order) => order.Payment),
     __metadata("design:type", order_model_1.Order)
-], Payment.prototype, "order", void 0);
+], Payment.prototype, "Order", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 2, nullable: false }),
     __metadata("design:type", Number)
-], Payment.prototype, "amount", void 0);
+], Payment.prototype, "Amount", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 256, nullable: false }),
     __metadata("design:type", String)
-], Payment.prototype, "paymentStatus", void 0);
+], Payment.prototype, "PaymentStatus", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Payment.prototype, "paymentTimestamp", void 0);
+], Payment.prototype, "PaymentTimestamp", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Payment.prototype, "createdAt", void 0);
+], Payment.prototype, "CreatedAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Payment.prototype, "updatedAt", void 0);
-__decorate([
-    (0, typeorm_1.DeleteDateColumn)(),
-    __metadata("design:type", Date)
-], Payment.prototype, "deletedAt", void 0);
+], Payment.prototype, "UpdatedAt", void 0);
 exports.Payment = Payment = __decorate([
     (0, typeorm_1.Entity)({ name: 'payments' })
 ], Payment);

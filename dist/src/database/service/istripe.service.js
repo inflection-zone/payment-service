@@ -14,8 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StripeService = void 0;
 const stripe_1 = __importDefault(require("stripe"));
-const payment_type_enum_1 = require("../../domain.types/payment.type.enum");
-const payment_status_enum_1 = require("../../domain.types/payment.status.enum");
+const payment_type_enum_1 = require("../../domain.types/payment/payment.type.enum");
+const payment_status_enum_1 = require("../../domain.types/payment/payment.status.enum");
 class StripeService {
     constructor() {
         this.stripe = new stripe_1.default('your_stripe_secret_key', {
