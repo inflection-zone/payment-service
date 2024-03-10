@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import { PaymentService } from 'database/service/payment.service';
-import { RazorpayService } from 'database/service/irazorpay.service';
-import { StripeService } from 'database/service/istripe.service';
+import { RazorpayService } from 'database/service/providers/razorpay.service';
+import { StripeService } from 'database/service/providers/stripe.service';
 import { Order } from 'database/models/order.model';
 import { Repository } from 'typeorm';
 import { PaymentInitiationRequestDto } from 'domain.types/payment/payment.initiation.request.dto';
 import { PaymentInitiationResponseDto } from 'domain.types/payment/payment.initiation.response.dto';
-PaymentInitiationResponseDto
+PaymentInitiationResponseDto;
 import { PaymentValidator } from './payment.validator';
 import { ResponseHandler } from 'common/handlers/response.handler';
 
@@ -45,10 +45,9 @@ export class PaymentController {
             const message = 'Payment status retrieved successfully!';
             ResponseHandler.success(req, res, message, 200, { paymentId, status: paymentStatus });
         } catch (error) {
-            console.error('Error getting payment status:', error);
             ResponseHandler.handleError(req, res, error);
         }
     };
-}
 
+}
 

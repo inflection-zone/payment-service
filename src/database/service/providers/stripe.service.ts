@@ -1,13 +1,14 @@
 
 import Stripe from 'stripe';
-import { Payment } from '../models/payment.model';
+import { Payment } from '../../models/payment.model';
+import { PaymentGatewayResponseDto } from '../../../domain.types/payment/payment.gateway.response.dto';
+import { PaymentGatewayType } from '../../../domain.types/payment/payment.gateway.type.enum';
+import { PaymentType } from '../../../domain.types/payment/payment.type.enum';
+import { PaymentStatus } from '../../../domain.types/payment/payment.status.enum';
+import { IPaymentGatewayService } from '../../../domain.types/payment/payment.gateway.interface';
+///////////////////////////////////////////////////////////////////////////////////////
 
-import { PaymentGatewayResponseDto } from '../../domain.types/payment/payment.gateway.response.dto';
-import { PaymentGatewayType } from '../../domain.types/payment/payment.gateway.type.enum';
-import { PaymentType } from '../../domain.types/payment/payment.type.enum';
-import { PaymentStatus } from '../../domain.types/payment/payment.status.enum';
-import { PaymentGatewayService } from '../../domain.types/payment/payment.gateway.interface';
-export class StripeService implements PaymentGatewayService {
+export class StripeService implements IPaymentGatewayService {
   private stripe: Stripe;
 
   constructor() {
@@ -19,14 +20,11 @@ export class StripeService implements PaymentGatewayService {
     return [PaymentType[paymentType].toLowerCase() + '_stripe_method'];
   }
   
-
   async processPayment(
     payment: Payment,
     paymentType: PaymentType,
     amount: number,
-    //paymentMethodTypes: string[] = PaymentType,
   ): Promise<PaymentGatewayResponseDto> {
-    // Implement Stripe SDK for integration
     const stripePaymentMethodTypes = this.mapPaymentTypeToStripe(paymentType);
 
     try {
@@ -38,18 +36,18 @@ export class StripeService implements PaymentGatewayService {
 
       if (response && response.id) {
         return {
-          paymentId: payment.id,
-          transactionId: response.id,
-          status: PaymentStatus.CAPTURED,
+          PaymentId: payment.id,
+          TransactionId: response.id,
+          Status: PaymentStatus.CAPTURED,
         };
       }
 
     } catch (error) {
       console.error('Stripe error:', error);
       return {
-        paymentId: payment.id,
-        transactionId: null,
-        status: PaymentStatus.FAILED,
+        PaymentId: payment.id,
+        TransactionId: null,
+        Status: PaymentStatus.FAILED,
       };
     }
   }

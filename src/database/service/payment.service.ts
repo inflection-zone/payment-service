@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable linebreak-style */
 import { PaymentInitiationRequestDto } from "../../domain.types/payment/payment.initiation.request.dto";
 import { PaymentGatewayResponseDto } from "../../domain.types/payment/payment.gateway.response.dto";
 import { PaymentInitiationResponseDto } from "../../domain.types/payment/payment.initiation.response.dto";
@@ -7,18 +9,20 @@ import { Repository } from "typeorm";
 import { PaymentGatewayType } from "../../domain.types/payment/payment.gateway.type.enum";
 import { PaymentStatus } from "../../domain.types/payment/payment.status.enum";
 import { PaymentType } from "../../domain.types/payment/payment.type.enum";
-import { RazorpayService } from "./irazorpay.service";
-import { PaymentGatewayService } from "../../domain.types/payment/payment.gateway.interface";
-import { StripeService } from "./istripe.service";
+import { RazorpayService } from "./providers/razorpay.service";
+import { IPaymentGatewayService } from "../../domain.types/payment/payment.gateway.interface";
+import { StripeService } from "./providers/stripe.service";
 
 export class PaymentService {
-  private gatewayServices: Map<PaymentGatewayType, PaymentGatewayService>;
+
+  private gatewayServices: Map<PaymentGatewayType, IPaymentGatewayService>;
+
   constructor(
     private orderRepository: Repository<Order>,
     private razorpayService: RazorpayService,
     private stripeService: StripeService
   ) {
-    this.gatewayServices = new Map<PaymentGatewayType, PaymentGatewayService>()
+    this.gatewayServices = new Map<PaymentGatewayType, IPaymentGatewayService>()
       .set(PaymentGatewayType.RAZORPAY, this.razorpayService)
       .set(PaymentGatewayType.STRIPE, this.stripeService);
   }
@@ -27,8 +31,8 @@ export class PaymentService {
     orderDetails: PaymentInitiationRequestDto
   ): Promise<PaymentInitiationResponseDto> {
     const order = await this.orderRepository.findOne({
-      where: { id: orderDetails.OrderId },
-      relations: ["user"],
+      where     : { id: orderDetails.OrderId },
+      relations : ["user"],
     });
 
     if (!order) {
@@ -66,16 +70,16 @@ export class PaymentService {
       await this.onPaymentFailure(createdPayment);
     }
     return {
-      PaymentId: createdPayment.id,
-      Status: createdPayment.PaymentStatus,
-      TransactionId: createdPayment.TransactionId,
+      PaymentId     : createdPayment.id,
+      Status        : createdPayment.PaymentStatus,
+      TransactionId : createdPayment.TransactionId,
     };
   }
 
   async paymentStatus(paymentId: string): Promise<string> {
     const payment = await this.orderRepository.findOne({
-      where: { id: paymentId },
-      relations: ["payment"],
+      where     : { id: paymentId },
+      relations : ["payment"],
     });
     if (!payment || !payment.Payment) {
       throw new Error(
@@ -87,8 +91,8 @@ export class PaymentService {
 
   async getPaymentDetails(paymentId: string): Promise<Payment> {
     const payment = await this.orderRepository.findOne({
-      where: { id: paymentId },
-      relations: ["payment"],
+      where     : { id: paymentId },
+      relations : ["payment"],
     });
 
     if (!payment || !payment.Payment) {
@@ -106,8 +110,8 @@ export class PaymentService {
     let payment;
     try {
       payment = await this.orderRepository.findOne({
-        where: { id: orderId },
-        relations: ["payment"],
+        where     : { id: orderId },
+        relations : ["payment"],
       });
 
       if (!payment || !payment.payment) {
@@ -142,8 +146,8 @@ export class PaymentService {
     paymentGatewayResponse: PaymentGatewayResponseDto
   ): Promise<void> {
     const payment = await this.orderRepository.findOne({
-      where: { id: paymentGatewayResponse.PaymentId },
-      relations: ["order"],
+      where     : { id: paymentGatewayResponse.PaymentId },
+      relations : ["order"],
     });
 
     if (payment instanceof Payment) {
@@ -162,4 +166,5 @@ export class PaymentService {
   async onPaymentFailure(payment: Payment): Promise<void> {
     console.log(`Payment ${payment.id} failed.`);
   }
+
 }

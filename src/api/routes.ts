@@ -2,8 +2,8 @@ import express, { Request, Response } from 'express';
 import { Repository } from 'typeorm';
 import { getRepository } from 'typeorm';
 import { Order } from 'database/models/order.model';
-import { RazorpayService } from 'database/service/irazorpay.service';
-import { StripeService } from 'database/service/istripe.service';
+import { RazorpayService } from '../database/service/providers/razorpay.service';
+import { StripeService } from '../database/service/providers/stripe.service';
 import { PaymentController } from './payment.controller';
 
 export const register = (app: express.Application) => {

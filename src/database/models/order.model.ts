@@ -1,7 +1,5 @@
-// order.entity.ts
 import {
     Entity,
-    PrimaryGeneratedColumn,
     PrimaryColumn,
     Column,
     ManyToOne,

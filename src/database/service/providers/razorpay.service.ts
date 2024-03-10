@@ -1,15 +1,13 @@
-
-// import Razorpay from 'razorpay';
 import Razorpay from 'razorpay';
-import { Payment } from '../models/payment.model';
-import { PaymentGatewayResponseDto } from '../../domain.types/payment/payment.gateway.response.dto';
-import { PaymentGatewayService } from '../../domain.types/payment/payment.gateway.interface';
-import { PaymentType } from '../../domain.types/payment/payment.type.enum';
-import { PaymentStatus } from '../../domain.types/payment/payment.status.enum';
-import { Order } from '../models/order.model';
+import { Payment } from '../../models/payment.model';
+import { PaymentGatewayResponseDto } from '../../../domain.types/payment/payment.gateway.response.dto';
+import { IPaymentGatewayService } from '../../../domain.types/payment/payment.gateway.interface';
+import { PaymentType } from '../../../domain.types/payment/payment.type.enum';
+import { PaymentStatus } from '../../../domain.types/payment/payment.status.enum';
 
+///////////////////////////////////////////////////////////////////////////////////////
 
-export class RazorpayService implements PaymentGatewayService {
+export class RazorpayService implements IPaymentGatewayService {
     private razorpay: Razorpay;
   
     constructor() {
@@ -26,7 +24,7 @@ export class RazorpayService implements PaymentGatewayService {
       amount: number,
       
     ): Promise<PaymentGatewayResponseDto> {
-      // Process payment and get the response
+   
       const orderOptions = {
         amount: amount * 100, 
         currency: 'INR', 
@@ -38,7 +36,6 @@ export class RazorpayService implements PaymentGatewayService {
       throw new Error('Failed to create Razorpay order.');
     }
     
-   //The funds are reserved on the customer account.
       try {
         const response = await this.razorpay.payments.fetch(order.id);
 
@@ -47,21 +44,20 @@ export class RazorpayService implements PaymentGatewayService {
             amount * 100, 
             'INR',
             );
-   
-    //  funds have been transferred.
+
           if (captureResponse && captureResponse.status === 'captured') {
             return {
-              paymentId: payment.id,
-              transactionId: captureResponse.id,
-              status: PaymentStatus.SUCCESS,
+              PaymentId: payment.id,
+              TransactionId: captureResponse.id,
+              Status: PaymentStatus.SUCCESS,
             };
           }
         }
     
         return {
-          paymentId: payment.id,
-          transactionId: response.id,
-          status: PaymentStatus.FAILED,
+          PaymentId: payment.id,
+          TransactionId: response.id,
+          Status: PaymentStatus.FAILED,
         } as PaymentGatewayResponseDto;//update
       }
     
