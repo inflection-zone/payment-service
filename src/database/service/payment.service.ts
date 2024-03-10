@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable linebreak-style */
 import { PaymentInitiationRequestDto } from "../../domain.types/payment/payment.initiation.request.dto";
 import { PaymentGatewayResponseDto } from "../../domain.types/payment/payment.gateway.response.dto";
 import { PaymentInitiationResponseDto } from "../../domain.types/payment/payment.initiation.response.dto";
